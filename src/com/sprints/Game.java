@@ -18,7 +18,7 @@ public class Game {
     // ******** Fields **********
     private boolean gameOver = false;
     private TextParser parser = new TextParser();
-    private static final String ROOMS = "/rooms.json";
+    private static String ROOMS = "/rooms.json";
     Scanner myObj = new Scanner(System.in);   // instantiate scanner to read console input
 
     // ******** CTOR **********
@@ -53,6 +53,7 @@ public class Game {
                 }
                 else if("restart".equals(playerCommand)) {
                     restart();
+
                 }
                 else if ("help".equals(playerCommand)) {
                     getCommands();
@@ -128,7 +129,7 @@ public class Game {
         Console.clear();
         Utils.printWithDelays("...You feel a sharp prick.");
         System.out.println();
-        MusicPlayer.playSound("/Sound.wav");
+//        MusicPlayer.playSound("/Sound.wav");
     }
 
     // used to display status (current room, inventory, room description, etc)
@@ -145,6 +146,9 @@ public class Game {
             switch (Player.getInstance().getCurrentRoom()){
                 case "parlor" :
                     TextFileReader.getInstance().txtFileReader("/parlor.txt");
+                    break;
+                case "east room":
+                    TextFileReader.getInstance().txtFileReader("/eastroom.txt");
                     break;
                 case "east hall":
                 case "west hall":
@@ -207,6 +211,7 @@ public class Game {
             Player.getInstance().setCurrentRoom("basement");
             Player.getInstance().getInventory().clear();
             Console.clear();
+            TimeElapsed.getInstance().resetInstance();
             start();
         }
         else {
