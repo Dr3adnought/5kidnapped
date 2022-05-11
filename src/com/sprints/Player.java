@@ -28,7 +28,7 @@ class Player {
     /* we do not want to instantiate multiple.
     static allows us to use through entire app where needed.*/
     public static Player getInstance() {
-        if (player == null) {
+        if (player == null || Restart.getRestart()) {
             player = new Player();
         }
         return player;

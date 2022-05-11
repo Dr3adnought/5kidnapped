@@ -27,7 +27,7 @@ public class Game {
 
     // ******** Singleton Instantiation **********
     public static Game getInstance() throws LineUnavailableException {
-        if (game == null) {
+        if (game == null || Restart.getRestart()) {
             game = new Game();
         }
         return game;
@@ -47,6 +47,9 @@ public class Game {
                 Thread.sleep(1000);
                 Console.clear();
 
+                if(Restart.getRestart()){
+                    Restart.setRestart(false);
+                }
                 //if player inputs "quit" it will break out of the while loop and exit the game----
                 if ("quit".equals(playerCommand) || ("q".equals(playerCommand))) {
                     quit();
@@ -208,9 +211,8 @@ public class Game {
             TimeUnit.SECONDS.sleep(2);
             clip.stop();
             clip.close();
-            Player.getInstance().setCurrentRoom("basement");
-            Player.getInstance().getInventory().clear();
             Console.clear();
+            Restart.setRestart(true);
             TimeElapsed.getInstance().resetInstance();
             start();
         }
