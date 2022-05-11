@@ -13,7 +13,7 @@ class TextFileReader {
     // ******** Singleton Instantiation **********
     // only one instance needed
     public static TextFileReader getInstance() {
-        if(fileReader == null) {
+        if(fileReader == null || Restart.getRestart()) {
             fileReader = new TextFileReader();
         }
         return fileReader;
