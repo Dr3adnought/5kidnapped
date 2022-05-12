@@ -32,37 +32,30 @@ class MusicPlayer {
         clip.loop(-1);
     }
 
-    // change in game music audible / non-audible
-
-    static void soundOn() {
-        if (!isSound) {
+    // pause/re-play in game music
+    static void toggleSound() {
+        if (isSound) {
+            clip.stop();
+            isSound = false;
+        } else {
             clip.start();
             isSound = true;
         }
     }
 
-    static void soundOff() {
-        if (isSound) {
-            clip.stop();
-            isSound = false;
-        }
-    }
-
     // lower music volume
     public static void lowerSoundVolume() {
-        if(!isSound) {
-            System.out.println("It doesn't go lower than off.");
+        if (!isSound) {
+            toggleSound();
         }
-        else {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-20.0f);
-        }
+        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-6.0f);
     }
 
     // increase music volume
     public static void raiseSoundVolume() {
         if (!isSound) {
-            soundOn();
+            toggleSound();
         }
         FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(+6.0f);

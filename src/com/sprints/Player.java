@@ -28,7 +28,7 @@ class Player {
     /* we do not want to instantiate multiple.
     static allows us to use through entire app where needed.*/
     public static Player getInstance() {
-        if (player == null || Restart.getRestart()) {
+        if (player == null) {
             player = new Player();
         }
         return player;
@@ -88,13 +88,13 @@ class Player {
                 System.out.println("You already have " + noun);
             }
             // what to do if noun is not present clearly present in room
-            else if (!roomItems.containsKey(noun) && "kitchen".equals(getCurrentRoom()) || "parlor".equals(getCurrentRoom()) || "east room".equals(getCurrentRoom()) || "west hall".equals(getCurrentRoom())) {
+            else if (!roomItems.containsKey(noun) && "kitchen".equals(getCurrentRoom()) || "parlor".equals(getCurrentRoom()) || "east hall".equals(getCurrentRoom()) || "west hall".equals(getCurrentRoom())) {
                 // switch case for rooms that hold clues inside other objects
                 switch (getCurrentRoom()) {
                     case "kitchen":
                         clueHolder = (JSONObject) roomItems.get("cabinets");
                         break;
-                    case "east room":
+                    case "east hall":
                         clueHolder = (JSONObject) roomItems.get("vase");
                         break;
                     case "parlor":
@@ -205,7 +205,7 @@ class Player {
         else {
             System.out.println("Too dark to see. Some light would help");
         }
-//        Utils.pressEnterToContinue();
+        Utils.pressEnterToContinue();
     }
 
     public String getCurrentRoom() {

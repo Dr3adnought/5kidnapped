@@ -52,7 +52,7 @@ public class OurJSONParser {
     /* we do not want to instantiate multiple.
     static allows us to use through entire app where needed.*/
     static OurJSONParser instantiate() {
-        if (ourParser == null || Restart.getRestart()) {
+        if (ourParser == null) {
             try {
                 ourParser = new OurJSONParser();
             }

@@ -3,7 +3,6 @@ package com.sprints;
 import com.apps.util.Console;
 import org.json.simple.JSONObject;
 import javax.sound.sampled.*;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -19,7 +18,7 @@ public class Game {
     // ******** Fields **********
     private boolean gameOver = false;
     private TextParser parser = new TextParser();
-    private static String ROOMS = "/rooms.json";
+    private static final String ROOMS = "/rooms.json";
     Scanner myObj = new Scanner(System.in);   // instantiate scanner to read console input
 
     // ******** CTOR **********
@@ -28,7 +27,7 @@ public class Game {
 
     // ******** Singleton Instantiation **********
     public static Game getInstance() throws LineUnavailableException {
-        if (game == null || Restart.getRestart()) {
+        if (game == null) {
             game = new Game();
         }
         return game;
@@ -48,9 +47,6 @@ public class Game {
                 Thread.sleep(1000);
                 Console.clear();
 
-                if(Restart.getRestart()){
-                    Restart.setRestart(false);
-                }
                 //if player inputs "quit" it will break out of the while loop and exit the game----
                 if ("quit".equals(playerCommand) || ("q".equals(playerCommand))) {
                     quit();
@@ -61,17 +57,8 @@ public class Game {
                 else if ("help".equals(playerCommand)) {
                     getCommands();
                 }
-                else if ("mute".equals(playerCommand)) {
-                    MusicPlayer.soundOff();
-                }
-                else if ("play".equals(playerCommand)) {
-                    MusicPlayer.soundOn();
-                }
-                else if ("raise".equals(playerCommand)) {
-                    MusicPlayer.raiseSoundVolume();
-                }
-                else if ("lower".equals(playerCommand)) {
-                    MusicPlayer.lowerSoundVolume();
+                else if ("mute".equals(playerCommand) || "play".equals(playerCommand)) {
+                    MusicPlayer.toggleSound();
                 }
 
             }
@@ -159,9 +146,6 @@ public class Game {
                 case "parlor" :
                     TextFileReader.getInstance().txtFileReader("/parlor.txt");
                     break;
-                case "east room":
-                    TextFileReader.getInstance().txtFileReader("/eastroom.txt");
-                    break;
                 case "east hall":
                 case "west hall":
                     TextFileReader.getInstance().txtFileReader("/hallway.txt");
@@ -220,9 +204,9 @@ public class Game {
             TimeUnit.SECONDS.sleep(2);
             clip.stop();
             clip.close();
+            Player.getInstance().setCurrentRoom("basement");
+            Player.getInstance().getInventory().clear();
             Console.clear();
-            Restart.setRestart(true);
-            TimeElapsed.getInstance().resetInstance();
             start();
         }
         else {
