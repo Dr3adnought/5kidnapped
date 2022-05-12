@@ -5,8 +5,11 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-class MusicPlayer {
-    static Clip clip;
+public class MusicPlayer {
+    public static Clip clip;
+    public static FloatControl fc;
+    public static float previousVolume = 6;
+    public static float currentVolume = -17;
     private static boolean isSound = true;     // music is ON by default
 
     // get the audio clip used for sound
@@ -34,17 +37,19 @@ class MusicPlayer {
 
     // change in game music audible / non-audible
 
-    static void soundOn() {
+    public static void soundOn() {
         if (!isSound) {
             clip.start();
             isSound = true;
+            fc.setValue(previousVolume);
         }
     }
 
-    static void soundOff() {
+    public static void soundOff() {
         if (isSound) {
             clip.stop();
             isSound = false;
+            fc.setValue(currentVolume - 23);
         }
     }
 
@@ -54,8 +59,8 @@ class MusicPlayer {
             System.out.println("It doesn't go lower than off.");
         }
         else {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-20.0f);
+            fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+            fc.setValue(-20.0f);
         }
     }
 
@@ -64,7 +69,7 @@ class MusicPlayer {
         if (!isSound) {
             soundOn();
         }
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(+6.0f);
+        fc = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+        fc.setValue(+6.0f);
     }
 }
