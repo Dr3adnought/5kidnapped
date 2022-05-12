@@ -3,6 +3,7 @@ package com.sprints;
 import com.apps.util.Console;
 import org.json.simple.JSONObject;
 import javax.sound.sampled.*;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
@@ -56,13 +57,21 @@ public class Game {
                 }
                 else if("restart".equals(playerCommand)) {
                     restart();
-
                 }
                 else if ("help".equals(playerCommand)) {
                     getCommands();
                 }
-                else if ("mute".equals(playerCommand) || "play".equals(playerCommand)) {
-                    MusicPlayer.toggleSound();
+                else if ("mute".equals(playerCommand)) {
+                    MusicPlayer.soundOff();
+                }
+                else if ("play".equals(playerCommand)) {
+                    MusicPlayer.soundOn();
+                }
+                else if ("raise".equals(playerCommand)) {
+                    MusicPlayer.raiseSoundVolume();
+                }
+                else if ("lower".equals(playerCommand)) {
+                    MusicPlayer.lowerSoundVolume();
                 }
 
             }
@@ -132,7 +141,7 @@ public class Game {
         Console.clear();
         Utils.printWithDelays("...You feel a sharp prick.");
         System.out.println();
-//        MusicPlayer.playSound("/Sound.wav");
+        MusicPlayer.playSound("/Sound.wav");
     }
 
     // used to display status (current room, inventory, room description, etc)
