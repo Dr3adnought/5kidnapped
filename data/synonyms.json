@@ -29,10 +29,12 @@
   ],
   [
     "raise",
-    "increase"
+    "increase",
+    "volume-up"
   ],
   [
     "lower",
-    "decrease"
+    "decrease",
+    "volume-down"
   ]
 ]

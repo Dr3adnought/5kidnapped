@@ -1,11 +1,10 @@
 {
   "west hall":
   {
-    "south": "kitchen",
     "east": "parlor",
     "item": {
       "bookcase": {
-        "description": "There are many book. All tattered and worn. Some appear to have been recently read. Upon closer investigation you see a clue (4)",
+        "description": "There are many books here. Perhaps you should try to look at the books, or maybe read one? Some appear to have been recently read. Upon closer investigation you see a clue (4)",
         "description2": "There are many books here. All tattered and worn.",
         "clue": {
           "name": "clue 4",
@@ -114,7 +113,7 @@
     "north": "parlor",
     "item": {
       "note": {
-        "description" : "Welcome to my game! I've been awaiting a player such as yourself. Sadly, it's still a work in progress,\nbut I'd love to hear what you think...if you survive.\nTwo pieces of friendly advice:\nfind my clues and hurry, hurry, hurry.\nYou have less than 5 minutes before the poison you've been injected you with claims your life. The only\nway to survive is to escape and the only way to escape is to play. I hope you're a fast reader."
+        "description" : "Welcome to my game! I've been awaiting a player such as yourself. Sadly, it's still a work in progress,\nbut I'd love to hear what you think...if you survive.\nTwo pieces of friendly advice:\nfind my clues and hurry, hurry, hurry.\nYou have less than 10 minutes before the poison you've been injected you with claims your life. The only\nway to survive is to escape and the only way to escape is to play. I hope you're a fast reader."
       },
       "torch": {
         "description": "The flame shows no signs of giving out, it may be useful",
