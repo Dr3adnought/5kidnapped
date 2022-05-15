@@ -44,7 +44,7 @@ public class Game {
                 String playerCommand = promptPlayer();
 
                 //Clear function coming from external jar
-                parser.playerInput(playerCommand);
+                parser.playerInput(playerCommand); //player input calls parse input (Text parser), calls
                 Thread.sleep(1000);
                 Console.clear();
 

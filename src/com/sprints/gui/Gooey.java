@@ -8,9 +8,11 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 //all the UI things
-class Gooey {
+public class Gooey {
     GameController gc;
     JFrame window;
     Container container;
@@ -28,9 +30,9 @@ class Gooey {
     public JLabel bgLabel[] = new JLabel[6];
 
     public Gooey(GameController gc){
-        this.gc =gc;
+        this.gc = gc;
         createMainField();
-        generateScreen();
+        generateScene();
         window.setVisible(true); //make it so we can see the window
 
     }
@@ -73,7 +75,7 @@ class Gooey {
 
 //        // Code for the main text display area
 //        messageText = new JTextArea("Main Game Text is Displayed Here");
-//        messageText.setBounds(35,200, 1100, 400);
+//        messageText.setBounds(35,200, 1100, 400); (TODO need to resize smaller and adjust placement if we use this)
 //        messageText.setBackground(Color.gray);
 //        messageText.setForeground(Color.black);
 //        messageText.setEditable(false); //display text only? or buttons here instead?
@@ -87,7 +89,7 @@ class Gooey {
         bgPanel[bgNum].setBounds(50,50,750, 375); //size of background
         bgPanel[bgNum].setBackground(null);
         bgPanel[bgNum].setLayout(null);
-        container.add(bgPanel[1]);
+        container.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0,0,750, 375);
@@ -95,12 +97,82 @@ class Gooey {
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
         bgLabel[bgNum].setIcon(bgIcon);
 
-        bgPanel[bgNum].add(bgLabel[1]);
+
 
     }
+    public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command){
+        ImageIcon arrowIcon = new ImageIcon(getClass().getClassLoader().getResource(arrowFileName));
 
-    public void generateScreen() {
-        // Screen 1
-        createBackground(1, "./images/Basement2.png");
+        JButton arrowButton = new JButton();
+        arrowButton.setBounds(x, y, width, height); //place arrow in correct location on background
+        arrowButton.setBackground(null);
+        arrowButton.setContentAreaFilled(false);
+        arrowButton.setFocusPainted(false);
+        arrowButton.setIcon(arrowIcon);
+        arrowButton.addActionListener(gc.aHandler);
+        arrowButton.setActionCommand(command);
+        arrowButton.setBorderPainted(false);
+
+        bgPanel[bgNum].add(arrowButton);
+
+    }
+    //may not need this method depending on how we do objects??
+    public void createObject(int bgNum, int xObj, int yObj, int widthObj,  int heightObj, String objName,
+                             String choice1, String choice2, String choice1Command, String choice2Command){
+        //create popupmenu
+        JPopupMenu popUpMenu = new JPopupMenu();
+        //create popup menu items
+        JMenuItem menuItem[] = new JMenuItem[3]; //number of choices
+        menuItem[1] = new JMenuItem(choice1);
+        menuItem[1].addActionListener(gc.aHandler);
+        menuItem[1].setActionCommand(choice1Command); //look
+        popUpMenu.add(menuItem[1]);
+
+        menuItem[2] = new JMenuItem(choice2);
+        menuItem[2].addActionListener(gc.aHandler);
+        menuItem[2].setActionCommand(choice2Command); //get
+        popUpMenu.add(menuItem[2]);
+
+        //create objects
+        JLabel objectLabel = new JLabel();
+        objectLabel.setBounds(xObj, yObj, widthObj, heightObj);
+
+        ImageIcon objectIcon = new ImageIcon(getClass().getClassLoader().getResource(objName));
+        objectLabel.setIcon(objectIcon);
+
+        objectLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) { }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    popUpMenu.show(objectLabel, e.getX(), e.getY());
+                }
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
+
+        bgPanel[bgNum].add(objectLabel);
+        bgPanel[bgNum].add(bgLabel[bgNum]);
+    }
+
+
+    public void generateScene() {
+
+        // Scene 1 (Basement)
+        createBackground(1, "images/basement.png");
+        createArrowButton(1, 325, 0, 50, 50, "images/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
+        bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
+
+        // Scene 2 (Parlour)
+        createBackground(2, "images/parlor.png");
+        createArrowButton(2, 325, 325, 50, 50, "images/arrow_down.png", "go basement"); //arrow needs to be added before label in order for us to see it
+        bgPanel[2].add(bgLabel[2]); //last thing added to panel goes on the 'bottom'
+
     }
 }
