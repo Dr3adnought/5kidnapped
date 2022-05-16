@@ -26,8 +26,8 @@ public class Gooey {
     Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
     Font smallerFont = new Font("Times New Roman", Font.PLAIN, 12 );
 
-    public JPanel bgPanel[] = new JPanel[6]; //we have 6 rooms
-    public JLabel bgLabel[] = new JLabel[6];
+    public JPanel bgPanel[] = new JPanel[7]; //array to hold panels for rooms
+    public JLabel bgLabel[] = new JLabel[7];
 
     public Gooey(GameController gc){
         this.gc = gc;
@@ -73,9 +73,9 @@ public class Gooey {
 
 
 
-//        // Code for the main text display area
+//        // Code for area to display text at bottom
 //        messageText = new JTextArea("Main Game Text is Displayed Here");
-//        messageText.setBounds(35,200, 1100, 400); (TODO need to resize smaller and adjust placement if we use this)
+//        messageText.setBounds(35,200, 400, 30); (TODO need to resize smaller and adjust placement if we use this)
 //        messageText.setBackground(Color.gray);
 //        messageText.setForeground(Color.black);
 //        messageText.setEditable(false); //display text only? or buttons here instead?
@@ -169,10 +169,33 @@ public class Gooey {
         createArrowButton(1, 325, 0, 50, 50, "images/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
         bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
 
-        // Scene 2 (Parlour)
+        // Scene 2 (Parlor)
         createBackground(2, "images/parlor.png");
-        createArrowButton(2, 325, 325, 50, 50, "images/arrow_down.png", "go basement"); //arrow needs to be added before label in order for us to see it
-        bgPanel[2].add(bgLabel[2]); //last thing added to panel goes on the 'bottom'
+        createArrowButton(2, 325, 0, 50, 50, "images/arrow_up.png", "go kitchen");
+        createArrowButton(2, 325, 325, 50, 50, "images/arrow_down.png", "go basement");
+        createArrowButton(2, 700, 140, 50, 50, "images/arrow_right.png", "go east hall");
+        createArrowButton(2, 0, 140, 50, 50,"images/arrow_left.png", "go west hall");
+        bgPanel[2].add(bgLabel[2]);
 
+        // Scene 3 (Kitchen)
+        createBackground(3, "images/kitchen.png");
+        createArrowButton(3, 325, 325, 50, 50, "images/arrow_down.png", "go parlor");
+        bgPanel[3].add(bgLabel[3]);
+
+        // Scene 4 (East Hall)
+        createBackground(4, "images/EastHall.png");
+        createArrowButton(4, 700, 140, 50, 50, "images/arrow_right.png", "go east room");
+        createArrowButton(4, 0, 140, 50, 50,"images/arrow_left.png", "go parlor");
+        bgPanel[4].add(bgLabel[4]);
+
+        // Scene 5 (East Room)
+        createBackground(5, "images/eastRoom.png");
+        createArrowButton(5, 0, 140, 50, 50,"images/arrow_left.png", "go east hall");
+        bgPanel[5].add(bgLabel[5]);
+
+        //Scene 6 (West Hall)
+        createBackground(6, "images/WestHall.png");
+        createArrowButton(6, 700, 140, 50, 50, "images/arrow_right.png", "go parlor");
+        bgPanel[6].add(bgLabel[6]);
     }
 }
