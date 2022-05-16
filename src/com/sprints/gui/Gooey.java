@@ -1,7 +1,5 @@
 package com.sprints.gui;
 
-import com.sprints.MusicPlayer;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -10,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
+
+import com.sprints.gui.Sound.*;
 
 //all the UI things
 public class Gooey {
@@ -21,6 +22,7 @@ public class Gooey {
     JLabel gameTitleLabel;
     JPanel gameInventoryPanel;
     JLabel gameInventoryLabel;
+    JPanel gameSoundPanel;
 
     Font titleFont = new Font("Monospaced", Font.BOLD, 55);
     Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
@@ -29,12 +31,23 @@ public class Gooey {
     public JPanel bgPanel[] = new JPanel[6]; //we have 6 rooms
     public JLabel bgLabel[] = new JLabel[6];
 
+    Sound sound = new Sound();
+    JSlider slider;
+    URL soundURL;
+
     public Gooey(GameController gc){
         this.gc = gc;
         createMainField();
         generateScene();
         window.setVisible(true); //make it so we can see the window
 
+    }
+
+    public void playMusic(URL url) {
+
+        sound.setFile(url);
+        sound.play();
+        sound.loop();
     }
 
     //methods
@@ -61,7 +74,7 @@ public class Gooey {
 
         //Create a panel to hold the 'Inventory' clickable item
         gameInventoryPanel = new JPanel();
-        gameInventoryPanel.setBounds(50, 435, 125, 20);
+        gameInventoryPanel.setBounds(50, 435, 125, 35);
         gameInventoryPanel.setBackground(Color.pink);
         container.add(gameInventoryPanel);
 
@@ -70,6 +83,66 @@ public class Gooey {
         gameInventoryLabel.setForeground(Color.black);
         gameInventoryLabel.setFont(smallerFont);
         gameInventoryPanel.add(gameInventoryLabel);
+
+        // Create a panel to hold the 'Sound' slider & controls
+        gameSoundPanel = new JPanel();
+        gameSoundPanel.setBounds(225, 435, 475, 35);
+        gameSoundPanel.setBackground(Color.BLUE);
+        container.add(gameSoundPanel);
+
+        JButton playB = new JButton("PLAY");
+        playB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                playMusic(soundURL);
+            }
+        });
+        window.add(playB);
+
+        JButton stopB = new JButton("STOP");
+        stopB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sound.stop();
+            }
+        });
+        window.add(stopB);
+
+        slider = new JSlider(-40, 6);
+        slider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                sound.currentVolume = slider.getValue();
+                if(sound.currentVolume == -40) {
+                    sound.currentVolume = -80;
+                }
+                System.out.println("volume:" + sound.currentVolume);
+                sound.fc.setValue(sound.currentVolume);
+            }
+        });
+
+        JButton muteB = new JButton("Mute");
+        muteB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sound.volumeMute(slider);
+            }
+        });
+        window.add(muteB);
+
+
+        window.add(slider);
+
+        window.pack();
+        window.setVisible(true);
+
+        // Sound File
+        soundURL = getClass().getResource("/com/sprints/gui/Sound.wav");
+
+        gameSoundPanel.add(playB);
+        gameSoundPanel.add(stopB);
+        gameSoundPanel.add(muteB);
+        gameSoundPanel.add(slider);
 
 
 
