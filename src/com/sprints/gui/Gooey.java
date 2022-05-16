@@ -116,6 +116,22 @@ public class Gooey {
         bgPanel[bgNum].add(arrowButton);
 
     }
+
+    private void createStartButton(int bgNum, int x, int y, int width, int height, String command){
+
+        JPanel startButtonPanel = new JPanel();
+        startButtonPanel.setBounds(x,y,width,height);
+        startButtonPanel.setBackground(Color.black);
+
+        JButton startButton = new JButton("START");
+        startButton.setBackground(Color.white);
+        startButton.setForeground(Color.red);
+        startButton.addActionListener(gc.aHandler);
+        startButton.setActionCommand(command);
+        startButtonPanel.add(startButton);
+        bgPanel[bgNum].add(startButtonPanel);
+
+    }
     //may not need this method depending on how we do objects??
     public void createObject(int bgNum, int xObj, int yObj, int widthObj,  int heightObj, String objName,
                              String choice1, String choice2, String choice1Command, String choice2Command){
@@ -163,6 +179,11 @@ public class Gooey {
 
 
     public void generateScene() {
+
+        // Scene 0 (Start)
+        createBackground(0,"images/welcomeScreen.png");
+        createStartButton(0,315,325,120,50,"start");
+        bgPanel[0].add(bgLabel[0]);
 
         // Scene 1 (Basement)
         createBackground(1, "images/basement.png");

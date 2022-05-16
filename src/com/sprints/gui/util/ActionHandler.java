@@ -24,7 +24,9 @@ public class ActionHandler implements ActionListener {
 
             //change scenes
 
-            case "go basement" : gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
+            case "start":
+            case "go basement" :
+                gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
             case "go parlor" : gc.sChanger.showScene2(); Player.getInstance().setCurrentRoom("parlor"); break;
             case "go kitchen" : gc.sChanger.showScene3(); Player.getInstance().setCurrentRoom("kitchen"); break;
             case "go east hall" : gc.sChanger.showScene4(); Player.getInstance().setCurrentRoom("east hall"); break;

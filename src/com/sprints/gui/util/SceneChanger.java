@@ -12,6 +12,7 @@ public class SceneChanger {
 
     //business methods
     public void showScene1(){ //basement
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(true); //show the basement
         gc.gooey.bgPanel[2].setVisible(false); //don't show the parlor
         gc.gooey.bgPanel[3].setVisible(false);
@@ -20,6 +21,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[6].setVisible(false);
     }
     public void showScene2(){ //parlor
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false); //don't show the basement
         gc.gooey.bgPanel[2].setVisible(true); //show the parlor
         gc.gooey.bgPanel[3].setVisible(false);
@@ -28,6 +30,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[6].setVisible(false);
     }
     public void showScene3(){ //kitchen
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
         gc.gooey.bgPanel[3].setVisible(true); //show the kitchen
@@ -36,6 +39,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[6].setVisible(false);
     }
     public void showScene4(){
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
         gc.gooey.bgPanel[3].setVisible(false);
@@ -45,6 +49,7 @@ public class SceneChanger {
 
     }
     public void showScene5(){
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
         gc.gooey.bgPanel[3].setVisible(false);
@@ -54,6 +59,7 @@ public class SceneChanger {
 
     }
     public void showScene6(){
+        gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
         gc.gooey.bgPanel[3].setVisible(false);
