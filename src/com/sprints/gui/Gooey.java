@@ -1,5 +1,6 @@
 package com.sprints.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -9,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
-
-import com.sprints.gui.Sound.*;
 
 //all the UI things
 public class Gooey {
@@ -34,6 +33,10 @@ public class Gooey {
     Sound sound = new Sound();
     JSlider slider;
     URL soundURL;
+    URL playIMG;
+    URL stopIMG;
+    URL soundIMG;
+    URL muteIMG;
 
     public Gooey(GameController gc){
         this.gc = gc;
@@ -58,7 +61,7 @@ public class Gooey {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //lets us close the window
         window.setLayout(null); //custom layout
         container = window.getContentPane();
-        container.setBackground(Color.black); //set background color
+        container.setBackground(Color.BLACK); //set background color
 
         //Create a panel to hold the Game's title at top
         gameTitlePanel = new JPanel();
@@ -86,11 +89,22 @@ public class Gooey {
 
         // Create a panel to hold the 'Sound' slider & controls
         gameSoundPanel = new JPanel();
-        gameSoundPanel.setBounds(225, 435, 475, 35);
-        gameSoundPanel.setBackground(Color.BLUE);
+        gameSoundPanel.setBounds(15, 150, 30, 200);
+        gameSoundPanel.setBackground(Color.BLACK);
         container.add(gameSoundPanel);
 
-        JButton playB = new JButton("PLAY");
+        JButton playB = new JButton();
+        // play button image
+        playIMG = getClass().getResource("/com/sprints/gui/resources/play-32.png");
+
+        try {
+            Image imgPlay = ImageIO.read(playIMG);
+            Image scaledPlay = imgPlay.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+            playB.setIcon(new ImageIcon(scaledPlay));
+            playB.setBackground(Color.red);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         playB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,7 +113,18 @@ public class Gooey {
         });
         window.add(playB);
 
-        JButton stopB = new JButton("STOP");
+        JButton stopB = new JButton();
+        // stop button image
+        stopIMG = getClass().getResource(("/com/sprints/gui/resources/stop-32.png"));
+
+        try {
+            Image imgStop = ImageIO.read(stopIMG);
+            Image scaledStop = imgStop.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+            stopB.setIcon(new ImageIcon(scaledStop));
+            stopB.setBackground(Color.red);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         stopB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -108,12 +133,15 @@ public class Gooey {
         });
         window.add(stopB);
 
-        slider = new JSlider(-40, 6);
+        slider = new JSlider(JSlider.VERTICAL, -30, 6, -12);
+        slider.setPreferredSize(new Dimension(20, 100));
+//        slider.setForeground(Color.red);
+        slider.setBackground(Color.BLACK);
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 sound.currentVolume = slider.getValue();
-                if(sound.currentVolume == -40) {
+                if(sound.currentVolume == -30) {
                     sound.currentVolume = -80;
                 }
                 System.out.println("volume:" + sound.currentVolume);
@@ -121,7 +149,20 @@ public class Gooey {
             }
         });
 
-        JButton muteB = new JButton("Mute");
+        JButton muteB = new JButton();
+
+        muteIMG = getClass().getResource(("/com/sprints/gui/resources/mute-32.png"));
+
+        try {
+
+            Image imgMute = ImageIO.read(muteIMG);
+            Image scaledMute = imgMute.getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+            muteB.setIcon(new ImageIcon(scaledMute));
+            muteB.setBackground(Color.red);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
         muteB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -137,7 +178,7 @@ public class Gooey {
         window.setVisible(true);
 
         // Sound File
-        soundURL = getClass().getResource("/com/sprints/gui/Sound.wav");
+        soundURL = getClass().getResource("/com/sprints/gui/resources/Sound.wav");
 
         gameSoundPanel.add(playB);
         gameSoundPanel.add(stopB);
