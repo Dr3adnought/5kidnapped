@@ -74,10 +74,11 @@ public class OurJSONParser {
         JSONArray verbs = (JSONArray) commandJSON.get("verbs");
         JSONArray nouns = (JSONArray) commandJSON.get("nouns");
         JSONArray items = (JSONArray) commandJSON.get("items");
-        JSONObject room = (JSONObject) roomsJSON.get(Player.getInstance().getCurrentRoom());
-        JSONObject roomItems = (JSONObject) room.get("item");
+        JSONObject room = (JSONObject) roomsJSON.get(Player.getInstance().getCurrentRoom()); //player's current room
+        JSONObject roomItems = (JSONObject) room.get("item"); //the current room's items / all items in the current room
         JSONObject clueHolder = null;
 
+        // seems redundant?? did this earlier (text parser)
         if (command.size() == 1) {
             commands.add(command.get(0));
         }

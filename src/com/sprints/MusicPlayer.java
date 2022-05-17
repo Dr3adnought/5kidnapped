@@ -41,7 +41,7 @@ public class MusicPlayer {
         if (!isSound) {
             clip.start();
             isSound = true;
-            fc.setValue(previousVolume);
+            // fc.setValue(previousVolume);
         }
     }
 
@@ -49,7 +49,7 @@ public class MusicPlayer {
         if (isSound) {
             clip.stop();
             isSound = false;
-            fc.setValue(currentVolume - 23);
+           // fc.setValue(currentVolume - 23);
         }
     }
 

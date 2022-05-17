@@ -24,7 +24,7 @@ public class TextParser {
             System.out.println("What would you like to do?");
         }
         else {
-            inputCommand = commandTokenizer(in);
+            inputCommand = commandTokenizer(in); //trimmed input to command tokenizer
             parseInput(inputCommand);
         }
     }
@@ -40,7 +40,7 @@ public class TextParser {
         return tokens;
     }
 
-    // separate verbs and nouns, passing them to JSON command parser
+    // separate verbs and nouns, passing them to JSON command parser, validating that there is a valid command(s)
     private void parseInput(List<String> inputCommand) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         String verb;
         String noun;
@@ -66,12 +66,12 @@ public class TextParser {
             command.add(verb);
             command.add(noun);
         }
-        else {
+        else { // input = to 2
             verb = inputCommand.get(0);
             noun = inputCommand.get(1);
             command.add(verb);
             command.add(noun);
         }
-        OurJSONParser.instantiate().commandParser(command);
+        OurJSONParser.instantiate().commandParser(command); //if command is valid, send to json parser
     }
 }

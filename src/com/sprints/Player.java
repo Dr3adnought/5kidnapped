@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-class Player {
+public class Player {
     // ******** Class Singleton **********
     private static Player player = null;
 
@@ -52,19 +52,19 @@ class Player {
 
         // pass to function depending on which synonym array verb belongs to
         if (verbObj1.contains(commands.get(0))) {
-            locationChange(commands.get(1), room, roomsObj);
+            locationChange(commands.get(1), room, roomsObj);                                            //go logic
         }else if (verbObj2.contains(commands.get(0))) {
-            getItems(commands.get(1), roomItems, validItems, inventoryObj, books, clueHolder);
+            getItems(commands.get(1), roomItems, validItems, inventoryObj, books, clueHolder);          //get logic
         }else if (verbObj3.contains(commands.get(0))) {
-            look(commands.get(1), room, roomItems, validItems, inventoryObj, books);
+            look(commands.get(1), room, roomItems, validItems, inventoryObj, books);                    //look logic
         }else if (verbObj4.contains(commands.get(0))) {
-            equip(commands.get(1));
+            equip(commands.get(1));                                                                     //equip logic
         }else if (verbObj5.contains(commands.get(0))) {
-            dropItems(commands.get(1), roomItems, validItems);
+            dropItems(commands.get(1), roomItems, validItems);                                          //drop logic
         }else if (verbObj6.contains(commands.get(0))) {
-            MusicPlayer.raiseSoundVolume();
+            MusicPlayer.raiseSoundVolume();                                                             //raise sound
         }else if (verbObj7.contains(commands.get(0))) {
-            MusicPlayer.lowerSoundVolume();
+            MusicPlayer.lowerSoundVolume();                                                             //lower sound
         }
     }
 
