@@ -141,7 +141,7 @@ public class Game {
         Console.clear();
         Utils.printWithDelays("...You feel a sharp prick.");
         System.out.println();
-        MusicPlayer.playSound("/com/sprints/gui/Sound.wav");
+        MusicPlayer.playSound("/com/sprints/gui/resources/Sound.wav");
     }
 
     // used to display status (current room, inventory, room description, etc)
