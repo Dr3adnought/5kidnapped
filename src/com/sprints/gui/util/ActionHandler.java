@@ -19,11 +19,14 @@ public class ActionHandler implements ActionListener {
         String playerChoice = e.getActionCommand();
 
         switch(playerChoice)   {
-            //case "go" : gc.event.goSomewhere(); break;
-            //case "look": gc.event.lookObject(); break;
+
+            //interact with objects //TODO implment clue logic
+            case "look sword" : gc.gooey.messageText.setText("Rusted but sharp. Dried blood covers the tip."); break;
+            case "get sword" : gc.gooey.messageText.setText("You got the sword!"); break; //TODO add to inventory
+            case "look vase" : gc.gooey.messageText.setText("Like everything else in the house this vase is old and time worn. Upon closer investigation you see a clue"); break;
+            case "get vase" : gc.gooey.messageText.setText("You got the vase!"); break; //TODO add to inventory
 
             //change scenes
-
             case "start":
             case "go basement" :
                 gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
