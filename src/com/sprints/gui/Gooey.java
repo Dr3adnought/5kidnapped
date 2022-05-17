@@ -186,17 +186,16 @@ public class Gooey {
         gameSoundPanel.add(slider);
 
 
-
-//        // Code for area to display text at bottom
-//        messageText = new JTextArea("Main Game Text is Displayed Here");
-//        messageText.setBounds(35,200, 400, 30); (TODO need to resize smaller and adjust placement if we use this)
-//        messageText.setBackground(Color.gray);
-//        messageText.setForeground(Color.black);
-//        messageText.setEditable(false); //display text only? or buttons here instead?
-//        messageText.setLineWrap(true);
-//        messageText.setWrapStyleWord(true);
-//        messageText.setFont(new Font("Arial", Font.PLAIN, 26));
-//        container.add(messageText);
+        // Code for area to display text at bottom
+        messageText = new JTextArea(); //text can go here
+        messageText.setBounds(360,475, 400, 30); //resized smaller and placed under image
+        messageText.setBackground(Color.black);
+        messageText.setForeground(Color.white);
+        messageText.setEditable(false); //display text only? or buttons here instead?
+        messageText.setLineWrap(true);
+        messageText.setWrapStyleWord(true);
+        messageText.setFont(new Font("Arial", Font.PLAIN, 12));
+        container.add(messageText);
     }
     public void createBackground(int bgNum, String bgFileName){
         bgPanel[bgNum] = new JPanel();
@@ -210,8 +209,6 @@ public class Gooey {
 
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
         bgLabel[bgNum].setIcon(bgIcon);
-
-
 
     }
     public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command){
@@ -270,13 +267,14 @@ public class Gooey {
         ImageIcon objectIcon = new ImageIcon(getClass().getClassLoader().getResource(objName));
         objectLabel.setIcon(objectIcon);
 
+        //display popup menu with right click on object
         objectLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) { }
             @Override
             public void mousePressed(MouseEvent e) {
                 if(SwingUtilities.isRightMouseButton(e)){
-                    popUpMenu.show(objectLabel, e.getX(), e.getY());
+                    popUpMenu.show(objectLabel, e.getX(), e.getY()); //current cords (x, y) of mouse cursor
                 }
             }
             @Override
@@ -300,37 +298,39 @@ public class Gooey {
         bgPanel[0].add(bgLabel[0]);
 
         // Scene 1 (Basement)
-        createBackground(1, "images/basement.png");
-        createArrowButton(1, 325, 0, 50, 50, "images/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
+        createBackground(1, "images/rooms/basement.png");
+        createArrowButton(1, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
         bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
 
         // Scene 2 (Parlor)
-        createBackground(2, "images/parlor.png");
-        createArrowButton(2, 325, 0, 50, 50, "images/arrow_up.png", "go kitchen");
-        createArrowButton(2, 325, 325, 50, 50, "images/arrow_down.png", "go basement");
-        createArrowButton(2, 700, 140, 50, 50, "images/arrow_right.png", "go east hall");
-        createArrowButton(2, 0, 140, 50, 50,"images/arrow_left.png", "go west hall");
+        createBackground(2, "images/rooms/parlor.png");
+        createArrowButton(2, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go kitchen");
+        createArrowButton(2, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go basement");
+        createArrowButton(2, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go east hall");
+        createArrowButton(2, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go west hall");
         bgPanel[2].add(bgLabel[2]);
 
         // Scene 3 (Kitchen)
-        createBackground(3, "images/kitchen.png");
-        createArrowButton(3, 325, 325, 50, 50, "images/arrow_down.png", "go parlor");
+        createBackground(3, "images/rooms/kitchen.png");
+        createArrowButton(3, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go parlor");
         bgPanel[3].add(bgLabel[3]);
 
         // Scene 4 (East Hall)
-        createBackground(4, "images/EastHall.png");
-        createArrowButton(4, 700, 140, 50, 50, "images/arrow_right.png", "go east room");
-        createArrowButton(4, 0, 140, 50, 50,"images/arrow_left.png", "go parlor");
+        createBackground(4, "images/rooms/eastHall.png");
+        createArrowButton(4, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go east room");
+        createArrowButton(4, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go parlor");
         bgPanel[4].add(bgLabel[4]);
 
         // Scene 5 (East Room)
-        createBackground(5, "images/eastRoom.png");
-        createArrowButton(5, 0, 140, 50, 50,"images/arrow_left.png", "go east hall");
+        createBackground(5, "images/rooms/eastRoom.png");
+        createObject(5, 520, 165, 100, 100, "images/objects/vase.png", "Look", "Get", "look vase", "get vase");
+        createObject(5, 200, 275, 100, 100, "images/objects/sword.png", "Look", "Get", "look sword", "get sword");
+        createArrowButton(5, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go east hall");
         bgPanel[5].add(bgLabel[5]);
 
         //Scene 6 (West Hall)
-        createBackground(6, "images/WestHall.png");
-        createArrowButton(6, 700, 140, 50, 50, "images/arrow_right.png", "go parlor");
+        createBackground(6, "images/rooms/westHall.png");
+        createArrowButton(6, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go parlor");
         bgPanel[6].add(bgLabel[6]);
     }
 }
