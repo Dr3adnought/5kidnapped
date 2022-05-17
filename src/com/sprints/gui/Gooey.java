@@ -188,7 +188,7 @@ public class Gooey {
 
         // Code for area to display text at bottom
         messageText = new JTextArea(); //text can go here
-        messageText.setBounds(360,475, 400, 30); //resized smaller and placed under image
+        messageText.setBounds(360,475, 400, 150); //resized smaller and placed under image
         messageText.setBackground(Color.black);
         messageText.setForeground(Color.white);
         messageText.setEditable(false); //display text only? or buttons here instead?
@@ -300,6 +300,9 @@ public class Gooey {
         // Scene 1 (Basement)
         createBackground(1, "images/rooms/basement.png");
         createArrowButton(1, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
+        createObject(1,568,248,50,50,"images/objects/note.png","Look","Get","look note","get note");
+        createObject(1,325,310,100,100,"images/objects/vaccine.png","Look","","look needle","");
+        createObject(1,475,120,100,100, "images/objects/walltorch.png","Look","Get","look torch","get torch");
         bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
 
         // Scene 2 (Parlor)
