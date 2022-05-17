@@ -26,6 +26,12 @@ public class ActionHandler implements ActionListener {
             case "look vase" : gc.gooey.messageText.setText("Like everything else in the house this vase is old and time worn. Upon closer investigation you see a clue"); break;
             case "get vase" : gc.gooey.messageText.setText("You got the vase!"); break; //TODO add to inventory
 
+            case "look note" : gc.gooey.messageText.setText("Welcome to my game! I've been awaiting a player such as yourself. Sadly, it's still a work in progress,\nbut I'd love to hear what you think...if you survive.\nTwo pieces of friendly advice:\nfind my clues and hurry, hurry, hurry.\nYou have less than 10 minutes before the poison you've been injected you with claims your life. The only\nway to survive is to escape and the only way to escape is to play. I hope you're a fast reader."); break;
+            case "get note" : gc.gooey.messageText.setText("You got the note!"); break; //TODO add to inventory
+            case "look torch" : gc.gooey.messageText.setText("The flame shows no signs of giving out, it may be useful"); break;
+            case "get torch" : gc.gooey.messageText.setText("You got the torch!"); break; //TODO add to inventory
+            case "look needle" : gc.gooey.messageText.setText("A small needle protrudes from a crack in the ground where you awoke"); break;
+
             //change scenes
             case "start":
             case "go basement" :
