@@ -31,8 +31,15 @@ public class ActionHandler implements ActionListener {
             case "look torch" : gc.gooey.messageText.setText("The flame shows no signs of giving out, it may be useful"); break;
             case "get torch" : gc.gooey.messageText.setText("You got the torch!"); break; //TODO add to inventory
             case "look needle" : gc.gooey.messageText.setText("A small needle protrudes from a crack in the ground where you awoke"); break;
+
+            case "look streamers" : gc.gooey.messageText.setText("Time has not treated these well"); break;
+            case "look candle holders" : gc.gooey.messageText.setText("Merely decorative. Covered in webs and dust, they appear to have not been used in some time"); break;
+            case "look corpse": gc.gooey.messageText.setText("Looks like they have the same wrist clamp as me...guess they didn't make it out in time.");break;
+            case "look portrait": gc.gooey.messageText.setText("Eerily the eyes of the portrait seem to follow you around the room, upon closer evaluation you find clue (1)\"");break;
+
             case "look clue2" : gc.gooey.messageText.setText("Pale skin and bright red lips curled in a grin can terrify (strikes is)"); break;
             case "get clue2" : gc.gooey.messageText.setText("You got clue 2!"); break;
+
 
             //change scenes
             case "start": gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
