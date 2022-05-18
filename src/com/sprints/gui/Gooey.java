@@ -27,8 +27,8 @@ public class Gooey {
     Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
     Font smallerFont = new Font("Times New Roman", Font.PLAIN, 12 );
 
-    public JPanel bgPanel[] = new JPanel[7]; //array to hold panels for rooms
-    public JLabel bgLabel[] = new JLabel[7];
+    public JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
+    public JLabel bgLabel[] = new JLabel[8];
 
     Sound sound = new Sound();
     JSlider slider;
@@ -41,6 +41,7 @@ public class Gooey {
     public Gooey(GameController gc){
         this.gc = gc;
         createMainField();
+        showWelcome();
         generateScene();
         window.setVisible(true); //make it so we can see the window
 
@@ -174,8 +175,8 @@ public class Gooey {
 
         window.add(slider);
 
-        window.pack();
-        window.setVisible(true);
+        //window.pack(); //commented these out to fix gui not loading correct size
+        //window.setVisible(true);
 
         // Sound File
         soundURL = getClass().getResource("/com/sprints/gui/resources/Sound.wav");
@@ -289,13 +290,20 @@ public class Gooey {
         bgPanel[bgNum].add(bgLabel[bgNum]);
     }
 
-
-    public void generateScene() {
-
+    public void showWelcome() {
         // Scene 0 (Start)
         createBackground(0, "images/rooms/welcomeScreen.png");
         createStartButton(0,315,325,120,50,"start");
         bgPanel[0].add(bgLabel[0]);
+
+    }
+
+    public void generateScene() {
+
+//        // Scene 0 (Start) //created a show welcome method instead
+//        createBackground(0,"images/welcomeScreen.png");
+//        createStartButton(0,315,325,120,50,"start");
+//        bgPanel[0].add(bgLabel[0]);
 
         // Scene 1 (Basement)
         createBackground(1, "images/rooms/basement.png");
@@ -332,12 +340,19 @@ public class Gooey {
         createBackground(5, "images/rooms/eastRoom.png");
         createObject(5, 520, 165, 100, 100, "images/objects/vase.png", "Look", "Get", "look vase", "get vase");
         createObject(5, 200, 275, 100, 100, "images/objects/sword.png", "Look", "Get", "look sword", "get sword");
+        createObject(5, 375, 295, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue2", "get clue2");
         createArrowButton(5, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go east hall");
         bgPanel[5].add(bgLabel[5]);
 
         //Scene 6 (West Hall)
         createBackground(6, "images/rooms/westHall.png");
         createArrowButton(6, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go parlor");
+        createArrowButton(6, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go west room");
         bgPanel[6].add(bgLabel[6]);
+
+        //Scene 7 (West Room)
+        createBackground(7, "images/rooms/westRoom.png");
+        createArrowButton(7, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go west hall");
+        bgPanel[7].add(bgLabel[7]);
     }
 }
