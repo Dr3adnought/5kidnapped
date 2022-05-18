@@ -58,7 +58,7 @@ public class Gooey {
     public void createMainField() {
         //create the overall window that holds everything
         window = new JFrame();
-        window.setSize(880,575);  //overall size of the window to hold everything
+        window.setSize(880,640);  //overall size of the window to hold everything
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //lets us close the window
         window.setLayout(null); //custom layout
         container = window.getContentPane();
@@ -323,6 +323,7 @@ public class Gooey {
         createObject(2,80,265,50,50,"images/objects/candleholders.png","Look","","look candle holders","");
         createObject(2,390,265,317,105,"images/objects/bones.png","Look","","look corpse","");
         createObject(2,360,110,50,65,"images/objects/portrait.png","Look","","look portrait","");
+        createObject(2, 275, 230, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue1", "get clue1");
         bgPanel[2].add(bgLabel[2]);
 
         // Scene 3 (Kitchen)
