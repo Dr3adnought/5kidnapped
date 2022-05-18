@@ -293,7 +293,7 @@ public class Gooey {
     public void generateScene() {
 
         // Scene 0 (Start)
-        createBackground(0,"images/welcomeScreen.png");
+        createBackground(0, "images/rooms/welcomeScreen.png");
         createStartButton(0,315,325,120,50,"start");
         bgPanel[0].add(bgLabel[0]);
 
@@ -306,7 +306,7 @@ public class Gooey {
         bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
 
         // Scene 2 (Parlor)
-        createBackground(2, "images/rooms/parlor.png");
+        createBackground(2, "images/rooms/Parlor.png");
         createArrowButton(2, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go kitchen");
         createArrowButton(2, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go basement");
         createArrowButton(2, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go east hall");
@@ -333,6 +333,12 @@ public class Gooey {
 
         //Scene 6 (West Hall)
         createBackground(6, "images/rooms/westHall.png");
+        createObject(6, 370, 250, 50, 36, "images/objects/clue.png", "Look", "Get", "look clue4", "get clue4");
+        createObject(6, 360, 185, 15, 22, "images/objects/books/frankenstein.png", "Look", "Get", "look Frankenstein", "get Frankenstein");
+        createObject(6, 390, 185, 15, 22, "images/objects/books/wicked.png", "Look", "Get", "look Something Wicked This Way Comes", "get Something Wicked This Way Comes");
+        createObject(6, 360, 205, 15, 22, "images/objects/books/it.png", "Look", "Get", "look It", "get It");
+        createObject(6, 390, 205, 15, 22, "images/objects/books/reprieve.png", "Look", "Get", "look Reprieve", "get Reprieve");
+        createObject(6, 350, 160, 62, 100, "images/objects/bookcase.PNG", "Look", "Get", "look bookcase", "get bookcase");
         createArrowButton(6, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go parlor");
         bgPanel[6].add(bgLabel[6]);
     }
