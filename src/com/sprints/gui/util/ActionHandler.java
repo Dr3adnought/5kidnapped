@@ -32,6 +32,20 @@ public class ActionHandler implements ActionListener {
             case "get torch" : gc.gooey.messageText.setText("You got the torch!"); break; //TODO add to inventory
             case "look needle" : gc.gooey.messageText.setText("A small needle protrudes from a crack in the ground where you awoke"); break;
 
+
+            case "look bookcase" : gc.gooey.messageText.setText("There are many books here. Perhaps you should try to look at the books, or maybe read one? Some appear to have been recently read. Upon closer investigation you see a clue (4)"); break;
+            case "get bookcase" : gc.gooey.messageText.setText("You can't carry a bookcase."); break;
+            case "look Frankenstein" : gc.gooey.messageText.setText("Frankenstein: The book tells the story of Victor Frankenstein, a Swiss student of natural science who creates an artificial man from pieces of corpses and brings his creature to life."); break;
+            case "get Frankenstein" : gc.gooey.messageText.setText("You took Mary Shelley's 'Frankenstein'."); break;
+            case "look Something Wicked This Way Comes" : gc.gooey.messageText.setText("Something Wicked This Way Comes: This book is about two 13-year-old best friends, and their nightmarish experience with a traveling carnival that comes to their Midwestern home."); break;
+            case "get Something Wicked This Way Comes" : gc.gooey.messageText.setText("You took Ray Bradbury's 'Something Wicked This Way Comes'."); break;
+            case "look It" : gc.gooey.messageText.setText("It: The story follows the experiences of seven children as they are terrorized by an evil entity that exploits the fears of its victims to disguise itself while hunting its prey."); break;
+            case "get It" : gc.gooey.messageText.setText("You took Stephen King's 'It'."); break;
+            case "look Reprieve" : gc.gooey.messageText.setText("Reprieve: Seems to be a novel about otherness, loneliness, racism, and identity wrapped in a gory tale about a full-contact escape room attraction."); break;
+            case "get Reprieve" : gc.gooey.messageText.setText("You took James Ham Mattson's 'Reprieve'."); break;
+            case "look clue4" : gc.gooey.messageText.setText("Clue: I'm every nightmare you've ever had (good luck)"); break;
+            case "get clue4" : gc.gooey.messageText.setText("You've retrieved this clue #4"); break;
+
             case "look streamers" : gc.gooey.messageText.setText("Time has not treated these well"); break;
             case "look candle holders" : gc.gooey.messageText.setText("Merely decorative. Covered in webs and dust, they appear to have not been used in some time"); break;
             case "look corpse": gc.gooey.messageText.setText("Looks like they have the same wrist clamp as me...guess they didn't make it out in time.");break;
@@ -39,6 +53,7 @@ public class ActionHandler implements ActionListener {
 
             case "look clue2" : gc.gooey.messageText.setText("Pale skin and bright red lips curled in a grin can terrify (strikes is)"); break;
             case "get clue2" : gc.gooey.messageText.setText("You got clue 2!"); break;
+
 
 
             //change scenes

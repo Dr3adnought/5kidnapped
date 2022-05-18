@@ -41,7 +41,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[6].setVisible(false);
         gc.gooey.bgPanel[7].setVisible(false);
     }
-    public void showScene4(){
+    public void showScene4(){ // east hall
         gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
@@ -51,7 +51,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[6].setVisible(false);
         gc.gooey.bgPanel[7].setVisible(false);
     }
-    public void showScene5(){
+    public void showScene5(){ // east room
         gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
@@ -62,7 +62,7 @@ public class SceneChanger {
         gc.gooey.bgPanel[7].setVisible(false);
 
     }
-    public void showScene6(){
+    public void showScene6(){ // west hall
         gc.gooey.bgPanel[0].setVisible(false);
         gc.gooey.bgPanel[1].setVisible(false);
         gc.gooey.bgPanel[2].setVisible(false);
