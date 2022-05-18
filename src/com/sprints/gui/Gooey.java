@@ -293,7 +293,7 @@ public class Gooey {
     public void generateScene() {
 
         // Scene 0 (Start)
-        createBackground(0,"images/welcomeScreen.png");
+        createBackground(0, "images/rooms/welcomeScreen.png");
         createStartButton(0,315,325,120,50,"start");
         bgPanel[0].add(bgLabel[0]);
 
@@ -306,11 +306,15 @@ public class Gooey {
         bgPanel[1].add(bgLabel[1]); //last thing added to panel goes on the 'bottom'
 
         // Scene 2 (Parlor)
-        createBackground(2, "images/rooms/parlor.png");
+        createBackground(2, "images/rooms/Parlor.png");
         createArrowButton(2, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go kitchen");
         createArrowButton(2, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go basement");
         createArrowButton(2, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go east hall");
         createArrowButton(2, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go west hall");
+        createObject(2,85,47,198,165,"images/objects/streamers1.png","Look","","look streamers","");
+        createObject(2,80,265,50,50,"images/objects/candleholders.png","Look","","look candle holders","");
+        createObject(2,390,265,317,105,"images/objects/bones.png","Look","","look corpse","");
+        createObject(2,360,110,50,65,"images/objects/portrait.png","Look","","look portrait","");
         bgPanel[2].add(bgLabel[2]);
 
         // Scene 3 (Kitchen)
