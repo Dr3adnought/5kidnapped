@@ -327,6 +327,10 @@ public class Gooey {
 
         // Scene 3 (Kitchen)
         createBackground(3, "images/rooms/kitchen.png");
+        createObject(3, 365, 5, 240, 175, "images/objects/cabinets.png", "Look", "Get", "look cabinets", "get cabinets");
+        createObject(3, 155, 250, 133, 22, "images/objects/sink.png", "Look", "Get", "look sink", "get sink");
+        createObject(3, 140, 0, 215, 180, "images/objects/window.png", "Look", "Get", "look window", "get window");
+        createObject(3, 470, 200, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue3", "get clue3");
         createArrowButton(3, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go parlor");
         bgPanel[3].add(bgLabel[3]);
 
@@ -346,7 +350,7 @@ public class Gooey {
 
         //Scene 6 (West Hall)
         createBackground(6, "images/rooms/westHall.png");
-        createObject(6, 370, 250, 50, 36, "images/objects/clue.png", "Look", "Get", "look clue4", "get clue4");
+        createObject(6, 370, 250, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue4", "get clue4");
         createObject(6, 360, 185, 15, 22, "images/objects/books/frankenstein.png", "Look", "Get", "look Frankenstein", "get Frankenstein");
         createObject(6, 390, 185, 15, 22, "images/objects/books/wicked.png", "Look", "Get", "look Something Wicked This Way Comes", "get Something Wicked This Way Comes");
         createObject(6, 360, 205, 15, 22, "images/objects/books/it.png", "Look", "Get", "look It", "get It");
