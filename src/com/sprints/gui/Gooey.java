@@ -15,7 +15,8 @@ import java.net.URL;
 public class Gooey {
     GameController gc;
     JFrame window;
-    Container container;
+    public Container container;
+    public static JLayeredPane layeredPane = new JLayeredPane();
     public JTextArea messageText;
     JPanel gameTitlePanel;
     JLabel gameTitleLabel;
@@ -27,8 +28,8 @@ public class Gooey {
     Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
     Font smallerFont = new Font("Times New Roman", Font.PLAIN, 12 );
 
-    public JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
-    public JLabel bgLabel[] = new JLabel[8];
+    public static JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
+    public static JLabel bgLabel[] = new JLabel[8];
 
     Sound sound = new Sound();
     JSlider slider;
@@ -61,7 +62,11 @@ public class Gooey {
         window.setSize(880,640);  //overall size of the window to hold everything
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //lets us close the window
         window.setLayout(null); //custom layout
+
+        layeredPane.setBounds(0, 0, 880, 640);
+
         container = window.getContentPane();
+        container.add(layeredPane);
         container.setBackground(Color.BLACK); //set background color
 
         //Create a panel to hold the Game's title at top
@@ -198,12 +203,13 @@ public class Gooey {
         messageText.setFont(new Font("Arial", Font.PLAIN, 12));
         container.add(messageText);
     }
+
     public void createBackground(int bgNum, String bgFileName){
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(50,50,750, 375); //size of background
         bgPanel[bgNum].setBackground(null);
         bgPanel[bgNum].setLayout(null);
-        container.add(bgPanel[bgNum]);
+        layeredPane.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0,0,750, 375);
@@ -211,7 +217,21 @@ public class Gooey {
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
         bgLabel[bgNum].setIcon(bgIcon);
 
+        //added a mouse listener to intercept any mouse events/stop them from triggering on other panels
+        bgPanel[bgNum].addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) { }
+            @Override
+            public void mousePressed(MouseEvent e) { }
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
     }
+
     public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command){
         ImageIcon arrowIcon = new ImageIcon(getClass().getClassLoader().getResource(arrowFileName));
 
@@ -273,15 +293,13 @@ public class Gooey {
             @Override
             public void mouseClicked(MouseEvent e) { }
             @Override
-            public void mousePressed(MouseEvent e) {
-                if(SwingUtilities.isRightMouseButton(e)){
+            public void mouseEntered(MouseEvent e) {
                     popUpMenu.show(objectLabel, e.getX(), e.getY()); //current cords (x, y) of mouse cursor
-                }
             }
             @Override
             public void mouseReleased(MouseEvent e) { }
             @Override
-            public void mouseEntered(MouseEvent e) { }
+            public void mousePressed(MouseEvent e) { }
             @Override
             public void mouseExited(MouseEvent e) { }
         });
@@ -366,4 +384,5 @@ public class Gooey {
         createArrowButton(7, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go west hall");
         bgPanel[7].add(bgLabel[7]);
     }
+
 }
