@@ -7,6 +7,8 @@ import com.sprints.gui.Gooey;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.sprints.gui.Gooey.bgPanel;
+
 public class ActionHandler implements ActionListener {
 
     GameController gc;
@@ -19,6 +21,7 @@ public class ActionHandler implements ActionListener {
     @Override //may put in event class
     public void actionPerformed(ActionEvent e) {
         String playerChoice = e.getActionCommand();
+
 
         switch(playerChoice)   {
 
@@ -71,22 +74,33 @@ public class ActionHandler implements ActionListener {
             case "look clue1" : gc.gooey.messageText.setText("Heavy is the head that wears the crown (you get)"); break;
             case "get clue1" : gc.gooey.messageText.setText("You got clue 1!"); break;
 
-            case "look clue2" : gc.gooey.messageText.setText("Pale skin and bright red lips curled in a grin can terrify (strikes is)"); break;
+            case "look clue2" : gc.gooey.messageText.setText("Clue: Pale skin and bright red lips curled in a grin can terrify (strikes is)"); break;
             case "get clue2" : gc.gooey.messageText.setText("You got clue 2!"); break;
 
 
 
             //change scenes
-            case "start": gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement");
-                Gooey.timer.start();
+
+//            case "start": gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
+//            case "go basement" : gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
+//            case "go parlor" : gc.sChanger.showScene2(); Player.getInstance().setCurrentRoom("parlor"); break;
+//            case "go kitchen" : gc.sChanger.showScene3(); Player.getInstance().setCurrentRoom("kitchen"); break;
+//            case "go east hall" : gc.sChanger.showScene4(); Player.getInstance().setCurrentRoom("east hall"); break;
+//            case "go east room" : gc.sChanger.showScene5(); Player.getInstance().setCurrentRoom("east rooom"); break;
+//            case "go west hall" : gc.sChanger.showScene6(); Player.getInstance().setCurrentRoom("west hall"); break;
+//            case "go west room" : gc.sChanger.showScene7(); Player.getInstance().setCurrentRoom("west room"); break;
+
+            case "start": gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); 
+            Gooey.timer.start();
             break;
-            case "go basement" : gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
-            case "go parlor" : gc.sChanger.showScene2(); Player.getInstance().setCurrentRoom("parlor"); break;
-            case "go kitchen" : gc.sChanger.showScene3(); Player.getInstance().setCurrentRoom("kitchen"); break;
-            case "go east hall" : gc.sChanger.showScene4(); Player.getInstance().setCurrentRoom("east hall"); break;
-            case "go east room" : gc.sChanger.showScene5(); Player.getInstance().setCurrentRoom("east rooom"); break;
-            case "go west hall" : gc.sChanger.showScene6(); Player.getInstance().setCurrentRoom("west hall"); break;
-            case "go west room" : gc.sChanger.showScene7(); Player.getInstance().setCurrentRoom("west room"); break;
+            case "go basement" : gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); break;
+            case "go parlor" : gc.sChanger.switchScene(bgPanel[2]); Player.getInstance().setCurrentRoom("parlor"); break;
+            case "go kitchen" : gc.sChanger.switchScene(bgPanel[3]); Player.getInstance().setCurrentRoom("kitchen"); break;
+            case "go east hall" : gc.sChanger.switchScene(bgPanel[4]); Player.getInstance().setCurrentRoom("east hall"); break;
+            case "go east room" : gc.sChanger.switchScene(bgPanel[5]); Player.getInstance().setCurrentRoom("east rooom"); break;
+            case "go west hall" : gc.sChanger.switchScene(bgPanel[6]); Player.getInstance().setCurrentRoom("west hall"); break;
+            case "go west room" : gc.sChanger.switchScene(bgPanel[7]); Player.getInstance().setCurrentRoom("west room"); break;
+
         }
     }
 }
