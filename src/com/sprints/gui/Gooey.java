@@ -1,6 +1,7 @@
 package com.sprints.gui;
 
 import com.sprints.Game;
+import com.sprints.gui.util.CountdownTimer;
 
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
@@ -16,8 +17,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 
 //all the UI things
-public class Gooey {
-    public static Timer timer;
+public class Gooey extends CountdownTimer {
     GameController gc;
     JFrame window;
     public Container container;
@@ -27,7 +27,7 @@ public class Gooey {
     JPanel gameTitlePanel;
     JLabel gameTitleLabel;
     JPanel gameTimerPanel;
-    JLabel gameTimerLabel;
+    public static JLabel gameTimerLabel;
     JPanel gameInventoryPanel;
     JLabel gameInventoryLabel;
     JPanel gameSoundPanel;
@@ -49,59 +49,25 @@ public class Gooey {
     URL soundIMG;
     URL muteIMG;
 
-
-    int second;
-    int minute;
-    DecimalFormat dFormat = new DecimalFormat("00");
-    String ddSecond;
-    String ddMinute;
-
-
+    static EyesOpen eyes = new EyesOpen();
 
     public Gooey(GameController gc){
         this.gc = gc;
         createMainField();
         showWelcome();
+        playMusic(soundURL);
         generateScene();
+        window.add(eyes);
+
         window.setVisible(true); //make it so we can see the window
 
     }
 
     public void playMusic(URL url) {
-
         sound.setFile(url);
         sound.play();
         sound.loop();
     }
-
-
-    public void countdownTimer() {
-
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                second--;
-                ddSecond = dFormat.format(second);
-                ddMinute = dFormat.format(minute);
-                gameTimerLabel.setText(ddMinute + ":" + ddSecond);
-
-                if(second==-1) {
-                    second = 59;
-                    minute--;
-                    ddSecond = dFormat.format(second);
-                    ddMinute = dFormat.format(minute);
-                    gameTimerLabel.setText(ddMinute + ":" + ddSecond);
-                }
-                if(minute==0 && second==0) {
-                    timer.stop();
-                    gc.gooey.messageText.setText("\"Your body begins to stiffen and agony takes the name of each breath. Your world fades to black as you fall to the ground...");
-                }
-
-            }
-        });
-    }
-
 
     //methods
     public void createMainField() {
@@ -140,9 +106,7 @@ public class Gooey {
         gameTimerLabel.setForeground(Color.red);
         gameTimerLabel.setFont(clockFont);
         gameTimerLabel.setText("10:00");
-        second = 0;
-        minute = 10;
-        countdownTimer();
+        countdownTimer(gc);
         gameTimerPanel.add(gameTimerLabel);
 
         //Create a panel to hold the 'Inventory' clickable item
@@ -162,7 +126,7 @@ public class Gooey {
         // Test for inventory
         inventoryText = new JTextArea(); //text can go here
         inventoryText.setBounds(50,460, 125, 50);
-        inventoryText.setBackground(Color.black);
+        inventoryText.setBackground(Color.red);
         inventoryText.setForeground(Color.white);
         inventoryText.setEditable(false);
         inventoryText.setLineWrap(true);
@@ -177,7 +141,9 @@ public class Gooey {
         gameSoundPanel.setBackground(Color.BLACK);
         container.add(gameSoundPanel);
 
+        // PLAY button imagery & functionality
         JButton playB = new JButton();
+
         // play button image
         playIMG = getClass().getResource("/com/sprints/gui/resources/play-32.png");
 
@@ -189,16 +155,20 @@ public class Gooey {
         } catch (Exception ex) {
             System.out.println(ex);
         }
+
+        // PLAY button functionality
         playB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 playMusic(soundURL);
             }
         });
-        window.add(playB);
+        window.add(playB);          // adds PLAY button to JFrame
 
+        // STOP button imagery & functionality
         JButton stopB = new JButton();
-        // stop button image
+
+        // STOP button image
         stopIMG = getClass().getResource(("/com/sprints/gui/resources/stop-32.png"));
 
         try {
@@ -209,17 +179,19 @@ public class Gooey {
         } catch (Exception ex) {
             System.out.println(ex);
         }
+        // STOP button functionality
         stopB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sound.stop();
             }
         });
-        window.add(stopB);
+        window.add(stopB);              // adds STOP button to JFrame
 
-        slider = new JSlider(JSlider.VERTICAL, -30, 6, -12);
+
+        // VOLUME Slider
+        slider = new JSlider(JSlider.VERTICAL, -30, 6, -12);  // volume numbers measured in dB - bottom of slider, top of slider & start position
         slider.setPreferredSize(new Dimension(20, 100));
-//        slider.setForeground(Color.red);
         slider.setBackground(Color.BLACK);
         slider.addChangeListener(new ChangeListener() {
             @Override
@@ -228,13 +200,15 @@ public class Gooey {
                 if(sound.currentVolume == -30) {
                     sound.currentVolume = -80;
                 }
-                System.out.println("volume:" + sound.currentVolume);
+                System.out.println("volume:" + sound.currentVolume);  // print in console to notify of exact sound measurement level in dB
                 sound.fc.setValue(sound.currentVolume);
             }
         });
 
+        // MUTE button imagery & functionality
         JButton muteB = new JButton();
 
+        // MUTE image
         muteIMG = getClass().getResource(("/com/sprints/gui/resources/mute-32.png"));
 
         try {
@@ -247,16 +221,15 @@ public class Gooey {
             System.out.println(ex);
         }
 
+        // MUTE functionality
         muteB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sound.volumeMute(slider);
             }
         });
-        window.add(muteB);
-
-
-        window.add(slider);
+        window.add(muteB);                  // adds MUTE button to JFrame
+        window.add(slider);                 // adds SLIDER to JFrame
 
         //window.pack(); //commented these out to fix gui not loading correct size
         //window.setVisible(true);
@@ -264,6 +237,7 @@ public class Gooey {
         // Sound File
         soundURL = getClass().getResource("/com/sprints/gui/resources/Sound.wav");
 
+        // adding PLAY, STOP, MUTE and SLIDER to JPanel
         gameSoundPanel.add(playB);
         gameSoundPanel.add(stopB);
         gameSoundPanel.add(muteB);
@@ -393,6 +367,7 @@ public class Gooey {
         bgPanel[0].add(bgLabel[0]);
 
     }
+    // Scene 1 (Basement)
 
     public void generateScene() {
 
@@ -401,7 +376,6 @@ public class Gooey {
 //        createStartButton(0,315,325,120,50,"start");
 //        bgPanel[0].add(bgLabel[0]);
 
-        // Scene 1 (Basement)
         createBackground(1, "images/rooms/basement.png");
         createArrowButton(1, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
         createObject(1,568,248,50,50,"images/objects/note.png","Look","Get","look note","get note");
