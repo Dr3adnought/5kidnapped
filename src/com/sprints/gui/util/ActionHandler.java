@@ -2,6 +2,7 @@ package com.sprints.gui.util;
 
 import com.sprints.Player;
 import com.sprints.gui.GameController;
+import com.sprints.gui.Gooey;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ public class ActionHandler implements ActionListener {
 
     public ActionHandler(GameController gc){
         this.gc = gc;
+
     }
 
     @Override //may put in event class
@@ -78,6 +80,7 @@ public class ActionHandler implements ActionListener {
 
 
             //change scenes
+
 //            case "start": gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
 //            case "go basement" : gc.sChanger.showScene1(); Player.getInstance().setCurrentRoom("basement"); break;
 //            case "go parlor" : gc.sChanger.showScene2(); Player.getInstance().setCurrentRoom("parlor"); break;
@@ -87,7 +90,9 @@ public class ActionHandler implements ActionListener {
 //            case "go west hall" : gc.sChanger.showScene6(); Player.getInstance().setCurrentRoom("west hall"); break;
 //            case "go west room" : gc.sChanger.showScene7(); Player.getInstance().setCurrentRoom("west room"); break;
 
-            case "start": gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); break;
+            case "start": gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); 
+            Gooey.timer.start();
+            break;
             case "go basement" : gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); break;
             case "go parlor" : gc.sChanger.switchScene(bgPanel[2]); Player.getInstance().setCurrentRoom("parlor"); break;
             case "go kitchen" : gc.sChanger.switchScene(bgPanel[3]); Player.getInstance().setCurrentRoom("kitchen"); break;
@@ -95,6 +100,7 @@ public class ActionHandler implements ActionListener {
             case "go east room" : gc.sChanger.switchScene(bgPanel[5]); Player.getInstance().setCurrentRoom("east rooom"); break;
             case "go west hall" : gc.sChanger.switchScene(bgPanel[6]); Player.getInstance().setCurrentRoom("west hall"); break;
             case "go west room" : gc.sChanger.switchScene(bgPanel[7]); Player.getInstance().setCurrentRoom("west room"); break;
+
         }
     }
 }
