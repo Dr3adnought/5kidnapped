@@ -2,6 +2,7 @@ package com.sprints.gui.util;
 
 import com.sprints.TextParser;
 import com.sprints.Player;
+import com.sprints.gui.EyesOpen;
 import com.sprints.gui.GameController;
 import com.sprints.gui.Gooey;
 
@@ -19,6 +20,7 @@ public class ActionHandler implements ActionListener {
 
     public ActionHandler(GameController gc){
         this.gc = gc;
+
 
     }
 
@@ -127,7 +129,9 @@ public class ActionHandler implements ActionListener {
 //            case "go west room" : gc.sChanger.showScene7(); Player.getInstance().setCurrentRoom("west room"); break;
 
             case "start": gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); 
-            Gooey.timer.start();
+            CountdownTimer.timer.start();
+                EyesOpen eyes = new EyesOpen();
+                eyes.eyesOpen();
             break;
             case "go basement" : gc.sChanger.switchScene(bgPanel[1]); Player.getInstance().setCurrentRoom("basement"); break;
             case "go parlor" : gc.sChanger.switchScene(bgPanel[2]); Player.getInstance().setCurrentRoom("parlor"); break;
