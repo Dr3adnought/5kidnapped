@@ -1,12 +1,16 @@
 package com.sprints.gui.util;
 
 import com.sprints.gui.GameController;
+import com.sprints.gui.Gooey;
 
 public class Event {
      GameController gc;
 
+
      public Event(GameController gc) {
           this.gc = gc;
+
+
      }
 
      //event methods
