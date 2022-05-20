@@ -1,6 +1,9 @@
 package com.sprints.gui;
 
+import com.sprints.Game;
+
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -10,16 +13,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 //all the UI things
 public class Gooey {
+    public static Timer timer;
     GameController gc;
     JFrame window;
-    Container container;
+    public Container container;
+    public static JLayeredPane layeredPane = new JLayeredPane();
     public JTextArea messageText;
     public JTextArea inventoryText;
     JPanel gameTitlePanel;
     JLabel gameTitleLabel;
+    JPanel gameTimerPanel;
+    JLabel gameTimerLabel;
     JPanel gameInventoryPanel;
     JLabel gameInventoryLabel;
     JPanel gameSoundPanel;
@@ -27,9 +35,11 @@ public class Gooey {
     Font titleFont = new Font("Monospaced", Font.BOLD, 55);
     Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
     Font smallerFont = new Font("Times New Roman", Font.PLAIN, 12 );
+    Font clockFont = new Font("Papyrus", Font.BOLD, 20);
+    Font inventoryFont = new Font("Papyrus", Font.BOLD, 14);
 
-    public JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
-    public JLabel bgLabel[] = new JLabel[8];
+    public static JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
+    public static JLabel bgLabel[] = new JLabel[8];
 
     Sound sound = new Sound();
     JSlider slider;
@@ -38,6 +48,15 @@ public class Gooey {
     URL stopIMG;
     URL soundIMG;
     URL muteIMG;
+
+
+    int second;
+    int minute;
+    DecimalFormat dFormat = new DecimalFormat("00");
+    String ddSecond;
+    String ddMinute;
+
+
 
     public Gooey(GameController gc){
         this.gc = gc;
@@ -55,6 +74,35 @@ public class Gooey {
         sound.loop();
     }
 
+
+    public void countdownTimer() {
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                second--;
+                ddSecond = dFormat.format(second);
+                ddMinute = dFormat.format(minute);
+                gameTimerLabel.setText(ddMinute + ":" + ddSecond);
+
+                if(second==-1) {
+                    second = 59;
+                    minute--;
+                    ddSecond = dFormat.format(second);
+                    ddMinute = dFormat.format(minute);
+                    gameTimerLabel.setText(ddMinute + ":" + ddSecond);
+                }
+                if(minute==0 && second==0) {
+                    timer.stop();
+                    gc.gooey.messageText.setText("\"Your body begins to stiffen and agony takes the name of each breath. Your world fades to black as you fall to the ground...");
+                }
+
+            }
+        });
+    }
+
+
     //methods
     public void createMainField() {
         //create the overall window that holds everything
@@ -62,7 +110,11 @@ public class Gooey {
         window.setSize(880,640);  //overall size of the window to hold everything
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //lets us close the window
         window.setLayout(null); //custom layout
+
+        layeredPane.setBounds(0, 0, 880, 640);
+
         container = window.getContentPane();
+        container.add(layeredPane);
         container.setBackground(Color.BLACK); //set background color
 
         //Create a panel to hold the Game's title at top
@@ -77,17 +129,34 @@ public class Gooey {
         gameTitleLabel.setFont(normalFont);
         gameTitlePanel.add(gameTitleLabel); //add the Label to the title panel
 
+        // Create a Panel to hold the Game's Timer in upper left
+        gameTimerPanel = new JPanel();
+        gameTimerPanel.setBounds(50, 10, 100, 30);
+        gameTimerPanel.setBackground(Color.black);
+        container.add(gameTimerPanel);
+
+        gameTimerLabel = new JLabel();
+        gameTimerLabel.setHorizontalAlignment(JLabel.CENTER);
+        gameTimerLabel.setForeground(Color.red);
+        gameTimerLabel.setFont(clockFont);
+        gameTimerLabel.setText("10:00");
+        second = 0;
+        minute = 10;
+        countdownTimer();
+        gameTimerPanel.add(gameTimerLabel);
+
         //Create a panel to hold the 'Inventory' clickable item
         gameInventoryPanel = new JPanel();
-        gameInventoryPanel.setBounds(50, 435, 125, 20);
-        gameInventoryPanel.setBackground(Color.pink);
+
+        gameInventoryPanel.setBounds(50, 435, 125, 100);
+        gameInventoryPanel.setBackground(Color.red);
         container.add(gameInventoryPanel);
 
 
         // Text for the Inventory
         gameInventoryLabel = new JLabel("Inventory");
         gameInventoryLabel.setForeground(Color.black);
-        gameInventoryLabel.setFont(smallerFont);
+        gameInventoryLabel.setFont(inventoryFont);
         gameInventoryPanel.add(gameInventoryLabel);
 
         // Test for inventory
@@ -212,12 +281,13 @@ public class Gooey {
         messageText.setFont(new Font("Arial", Font.PLAIN, 12));
         container.add(messageText);
     }
+
     public void createBackground(int bgNum, String bgFileName){
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(50,50,750, 375); //size of background
         bgPanel[bgNum].setBackground(null);
         bgPanel[bgNum].setLayout(null);
-        container.add(bgPanel[bgNum]);
+        layeredPane.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0,0,750, 375);
@@ -225,7 +295,21 @@ public class Gooey {
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
         bgLabel[bgNum].setIcon(bgIcon);
 
+        //added a mouse listener to intercept any mouse events/stop them from triggering on other panels
+        bgPanel[bgNum].addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) { }
+            @Override
+            public void mousePressed(MouseEvent e) { }
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
     }
+
     public void createArrowButton(int bgNum, int x, int y, int width, int height, String arrowFileName, String command){
         ImageIcon arrowIcon = new ImageIcon(getClass().getClassLoader().getResource(arrowFileName));
 
@@ -287,15 +371,13 @@ public class Gooey {
             @Override
             public void mouseClicked(MouseEvent e) { }
             @Override
-            public void mousePressed(MouseEvent e) {
-                if(SwingUtilities.isRightMouseButton(e)){
+            public void mouseEntered(MouseEvent e) {
                     popUpMenu.show(objectLabel, e.getX(), e.getY()); //current cords (x, y) of mouse cursor
-                }
             }
             @Override
             public void mouseReleased(MouseEvent e) { }
             @Override
-            public void mouseEntered(MouseEvent e) { }
+            public void mousePressed(MouseEvent e) { }
             @Override
             public void mouseExited(MouseEvent e) { }
         });
@@ -380,4 +462,5 @@ public class Gooey {
         createArrowButton(7, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go west hall");
         bgPanel[7].add(bgLabel[7]);
     }
+
 }
