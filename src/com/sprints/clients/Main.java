@@ -12,7 +12,7 @@ import java.io.IOException;
 class Main {
     public static void main(String[] args) throws IOException, InterruptedException, java.text.ParseException, UnsupportedAudioFileException, LineUnavailableException {
         new GameController(); //call game controller to launch our GUI/window
-        App app = new App();
-        app.execute();
+//        App app = new App();
+//        app.execute();
     }
 }

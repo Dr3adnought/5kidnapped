@@ -17,6 +17,7 @@ public class Gooey {
     JFrame window;
     Container container;
     public JTextArea messageText;
+    public JTextArea inventoryText;
     JPanel gameTitlePanel;
     JLabel gameTitleLabel;
     JPanel gameInventoryPanel;
@@ -78,15 +79,28 @@ public class Gooey {
 
         //Create a panel to hold the 'Inventory' clickable item
         gameInventoryPanel = new JPanel();
-        gameInventoryPanel.setBounds(50, 435, 125, 35);
+        gameInventoryPanel.setBounds(50, 435, 125, 20);
         gameInventoryPanel.setBackground(Color.pink);
         container.add(gameInventoryPanel);
+
 
         // Text for the Inventory
         gameInventoryLabel = new JLabel("Inventory");
         gameInventoryLabel.setForeground(Color.black);
         gameInventoryLabel.setFont(smallerFont);
         gameInventoryPanel.add(gameInventoryLabel);
+
+        // Test for inventory
+        inventoryText = new JTextArea(); //text can go here
+        inventoryText.setBounds(50,460, 125, 50);
+        inventoryText.setBackground(Color.black);
+        inventoryText.setForeground(Color.white);
+        inventoryText.setEditable(false);
+        inventoryText.setLineWrap(true);
+        inventoryText.setWrapStyleWord(true);
+        inventoryText.setFont(new Font("Arial", Font.PLAIN, 12));
+        container.add(inventoryText);
+
 
         // Create a panel to hold the 'Sound' slider & controls
         gameSoundPanel = new JPanel();
@@ -353,7 +367,7 @@ public class Gooey {
         createBackground(6, "images/rooms/westHall.png");
         createObject(6, 370, 250, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue4", "get clue4");
         createObject(6, 360, 185, 15, 22, "images/objects/books/frankenstein.png", "Look", "Get", "look Frankenstein", "get Frankenstein");
-        createObject(6, 390, 185, 15, 22, "images/objects/books/wicked.png", "Look", "Get", "look Something Wicked This Way Comes", "get Something Wicked This Way Comes");
+        createObject(6, 390, 185, 15, 22, "images/objects/books/wicked.png", "Look", "Get", "look Something Wicked", "get Something Wicked");
         createObject(6, 360, 205, 15, 22, "images/objects/books/it.png", "Look", "Get", "look It", "get It");
         createObject(6, 390, 205, 15, 22, "images/objects/books/reprieve.png", "Look", "Get", "look Reprieve", "get Reprieve");
         createObject(6, 350, 160, 62, 100, "images/objects/bookcase.PNG", "Look", "Get", "look bookcase", "get bookcase");
