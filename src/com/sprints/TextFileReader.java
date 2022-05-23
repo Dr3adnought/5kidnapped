@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-class TextFileReader {
+public class TextFileReader {
     // ******** Class Singleton **********
     private static TextFileReader fileReader = null;
 
@@ -21,7 +21,7 @@ class TextFileReader {
 
     // ******** Business Methods **********
     // read text files. May need elsewhere in future versions of Game
-    void txtFileReader(String filename) throws IOException {
+    public void txtFileReader(String filename) throws IOException {
         try (var in = App.class.getResourceAsStream(filename)) {
             Scanner scanner = new Scanner(in, StandardCharsets.UTF_8);
             while ( scanner.hasNextLine() ){

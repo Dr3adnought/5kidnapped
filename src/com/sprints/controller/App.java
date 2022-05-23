@@ -10,7 +10,7 @@ public class App {
     // ******** Business Methods **********
     // call Game start method to kick off game
     public void execute() throws IOException, ParseException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
-        Game.getInstance().start();
+        //Game.getInstance().start();
     }
 
 }

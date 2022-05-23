@@ -102,7 +102,7 @@ public class Game {
 
     // End game with a win if select correct book
     private void checkWin() throws IOException, InterruptedException {
-        if (Player.getInstance().getInventory().contains("it")) {
+        if (Player.getInstance().getInventory().containsKey("it")) {
             gameOver = true;
             Console.clear();
             TimeUnit.SECONDS.sleep(1);

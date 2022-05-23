@@ -1,5 +1,6 @@
 package com.sprints;
 
+import com.sprints.gui.GameController;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
@@ -12,8 +13,17 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class TextParser {
+
     // ********** Fields **********
     private List<String> inputCommand;
+    GameController gc;
+
+    public TextParser(){
+
+    }
+    public TextParser(GameController gc){
+        this.gc = gc;
+    }
 
     // ******** Business Methods **********
     /* checks input and passes to Tokenizer to break apart, then pass to parseInput
@@ -72,6 +82,7 @@ public class TextParser {
             command.add(verb);
             command.add(noun);
         }
-        OurJSONParser.instantiate().commandParser(command); //if command is valid, send to json parser
+        OurJSONParser.instantiate();
+        OurJSONParser.commandParser(command); //if command is valid, send to json parser
     }
 }

@@ -11,7 +11,7 @@ public class Sound {
 
     Clip clip;
     float previousVolume = 0;
-    float currentVolume = -12;
+    float currentVolume = -10;
     FloatControl fc;
     boolean mute = false;
 
