@@ -29,7 +29,7 @@ public class CountdownTimer {
     public static void countdownTimer(GameController gc) {
 
         second = 0;
-        minute = 2;
+        minute = 10;
 
         timer = new Timer(1000, new ActionListener() {
 
