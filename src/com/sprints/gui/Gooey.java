@@ -116,7 +116,6 @@ public class Gooey extends CountdownTimer {
         gameInventoryPanel.setBackground(Color.red);
         container.add(gameInventoryPanel);
 
-
         // Text for the Inventory
         gameInventoryLabel = new JLabel("Inventory");
         gameInventoryLabel.setForeground(Color.black);
@@ -132,8 +131,7 @@ public class Gooey extends CountdownTimer {
         inventoryText.setLineWrap(true);
         inventoryText.setWrapStyleWord(true);
         inventoryText.setFont(new Font("Arial", Font.PLAIN, 12));
-        container.add(inventoryText);
-
+        gameInventoryPanel.add(inventoryText);
 
         // Create a panel to hold the 'Sound' slider & controls
         gameSoundPanel = new JPanel();
@@ -231,9 +229,6 @@ public class Gooey extends CountdownTimer {
         window.add(muteB);                  // adds MUTE button to JFrame
         window.add(slider);                 // adds SLIDER to JFrame
 
-        //window.pack(); //commented these out to fix gui not loading correct size
-        //window.setVisible(true);
-
         // Sound File
         soundURL = getClass().getResource("/com/sprints/gui/resources/Sound.wav");
 
@@ -242,7 +237,6 @@ public class Gooey extends CountdownTimer {
         gameSoundPanel.add(stopB);
         gameSoundPanel.add(muteB);
         gameSoundPanel.add(slider);
-
 
         // Code for area to display text at bottom
         messageText = new JTextArea(); //text can go here
@@ -269,7 +263,7 @@ public class Gooey extends CountdownTimer {
         ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFileName));
         bgLabel[bgNum].setIcon(bgIcon);
 
-        //added a mouse listener to intercept any mouse events/stop them from triggering on other panels
+        //added a mouse listener to intercept any mouse events/stop them from triggering on other panels, fixed display/arrow issue
         bgPanel[bgNum].addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) { }
@@ -365,17 +359,11 @@ public class Gooey extends CountdownTimer {
         createBackground(0, "images/rooms/welcomeScreen.png");
         createStartButton(0,315,325,120,50,"start");
         bgPanel[0].add(bgLabel[0]);
-
     }
-    // Scene 1 (Basement)
+
 
     public void generateScene() {
-
-//        // Scene 0 (Start) //created a show welcome method instead
-//        createBackground(0,"images/welcomeScreen.png");
-//        createStartButton(0,315,325,120,50,"start");
-//        bgPanel[0].add(bgLabel[0]);
-
+        // Scene 1 (Basement)
         createBackground(1, "images/rooms/basement.png");
         createArrowButton(1, 325, 0, 50, 50, "images/arrows/arrow_up.png", "go parlor"); //arrow needs to be added before label in order for us to see it
         createObject(1,568,248,50,50,"images/objects/note.png","Look","Get","look note","get note");
@@ -436,5 +424,4 @@ public class Gooey extends CountdownTimer {
         createArrowButton(7, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go west hall");
         bgPanel[7].add(bgLabel[7]);
     }
-
 }
