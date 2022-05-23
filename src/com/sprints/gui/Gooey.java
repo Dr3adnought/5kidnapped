@@ -106,7 +106,7 @@ public class Gooey extends CountdownTimer {
         gameTimerLabel.setHorizontalAlignment(JLabel.CENTER);
         gameTimerLabel.setForeground(Color.red);
         gameTimerLabel.setFont(clockFont);
-        gameTimerLabel.setText("2:00");
+        gameTimerLabel.setText("10:00");
         countdownTimer(gc);
         gameTimerPanel.add(gameTimerLabel);
 
