@@ -16,7 +16,9 @@ public class SceneChanger {
     };
 
     //business methods
-    public void switchScene(JPanel p){
+
+    public static void switchScene(JPanel p){
+
         layeredPane.removeAll();
         layeredPane.add(p);
         layeredPane.repaint();
