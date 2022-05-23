@@ -8,12 +8,16 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.TimerTask;
 
 import static com.sprints.gui.EyesClosed.*;
+import static com.sprints.gui.Gooey.bgPanel;
+
 
 public class CountdownTimer {
 
     public static Timer timer;
+    static TimerTask task = new Task();
     static int second;
     static int minute;
     static DecimalFormat dFormat = new DecimalFormat("00");
@@ -21,12 +25,14 @@ public class CountdownTimer {
     static String ddMinute;
     static EyesClosed eyes = new EyesClosed();
 
+
     public static void countdownTimer(GameController gc) {
 
         second = 0;
-        minute = 10;
+        minute = 2;
 
         timer = new Timer(1000, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -44,11 +50,15 @@ public class CountdownTimer {
                 }
                 if(minute==0 && second==0) {
                     timer.stop();
-                    gc.gooey.messageText.setText("\"Your body begins to stiffen and agony takes the name of each breath. Your world fades to black as you fall to the ground...");
+                    task.cancel();
+                    gc.gooey.messageText.setText("Time's up.  Time to die!  Your body begins to stiffen and agony takes the name of each breath. Your world fades to black as you fall to the ground...");
+                    SceneChanger.switchScene(bgPanel[8]);
                     eyes.eyesClosed();
                 }
 
             }
         });
+
     }
+
 }

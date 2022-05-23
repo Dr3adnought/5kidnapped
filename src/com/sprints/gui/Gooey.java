@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 //all the UI things
 public class Gooey extends CountdownTimer {
     GameController gc;
-    JFrame window;
+    public static JFrame window;
     public Container container;
     public static JLayeredPane layeredPane = new JLayeredPane();
     public JTextArea messageText;
@@ -38,8 +38,8 @@ public class Gooey extends CountdownTimer {
     Font clockFont = new Font("Papyrus", Font.BOLD, 20);
     Font inventoryFont = new Font("Papyrus", Font.BOLD, 14);
 
-    public static JPanel bgPanel[] = new JPanel[8]; //array to hold panels for rooms
-    public static JLabel bgLabel[] = new JLabel[8];
+    public static JPanel bgPanel[] = new JPanel[10]; //array to hold panels for rooms
+    public static JLabel bgLabel[] = new JLabel[10];
 
     Sound sound = new Sound();
     JSlider slider;
@@ -53,6 +53,7 @@ public class Gooey extends CountdownTimer {
 
     public Gooey(GameController gc){
         this.gc = gc;
+
         createMainField();
         showWelcome();
         playMusic(soundURL);
@@ -86,13 +87,13 @@ public class Gooey extends CountdownTimer {
         //Create a panel to hold the Game's title at top
         gameTitlePanel = new JPanel();
         gameTitlePanel.setBounds(230, 10, 400, 30);  //measured from upper left corner
-        gameTitlePanel.setBackground(Color.red);
+        gameTitlePanel.setBackground(Color.black);
         container.add(gameTitlePanel);
 
         //Text for the Game's title
-        gameTitleLabel = new JLabel("5Kidnapped!");
-        gameTitleLabel.setForeground(Color.black);
-        gameTitleLabel.setFont(normalFont);
+        gameTitleLabel = new JLabel("Kidnapped!");
+        gameTitleLabel.setForeground(Color.red);
+        gameTitleLabel.setFont(clockFont);
         gameTitlePanel.add(gameTitleLabel); //add the Label to the title panel
 
         // Create a Panel to hold the Game's Timer in upper left
@@ -105,7 +106,7 @@ public class Gooey extends CountdownTimer {
         gameTimerLabel.setHorizontalAlignment(JLabel.CENTER);
         gameTimerLabel.setForeground(Color.red);
         gameTimerLabel.setFont(clockFont);
-        gameTimerLabel.setText("10:00");
+        gameTimerLabel.setText("2:00");
         countdownTimer(gc);
         gameTimerPanel.add(gameTimerLabel);
 
@@ -113,26 +114,26 @@ public class Gooey extends CountdownTimer {
         gameInventoryPanel = new JPanel();
 
         gameInventoryPanel.setBounds(50, 435, 125, 100);
-        gameInventoryPanel.setBackground(Color.red);
+        gameInventoryPanel.setBackground(Color.black);
         container.add(gameInventoryPanel);
 
 
         // Text for the Inventory
         gameInventoryLabel = new JLabel("Inventory");
-        gameInventoryLabel.setForeground(Color.black);
+        gameInventoryLabel.setForeground(Color.red);
         gameInventoryLabel.setFont(inventoryFont);
         gameInventoryPanel.add(gameInventoryLabel);
 
         // Test for inventory
         inventoryText = new JTextArea(); //text can go here
         inventoryText.setBounds(50,460, 125, 50);
-        inventoryText.setBackground(Color.red);
+        inventoryText.setBackground(Color.black);
         inventoryText.setForeground(Color.white);
         inventoryText.setEditable(false);
         inventoryText.setLineWrap(true);
         inventoryText.setWrapStyleWord(true);
         inventoryText.setFont(new Font("Arial", Font.PLAIN, 12));
-        container.add(inventoryText);
+        gameInventoryPanel.add(inventoryText);
 
 
         // Create a panel to hold the 'Sound' slider & controls
@@ -248,7 +249,7 @@ public class Gooey extends CountdownTimer {
         messageText = new JTextArea(); //text can go here
         messageText.setBounds(360,475, 400, 150); //resized smaller and placed under image
         messageText.setBackground(Color.black);
-        messageText.setForeground(Color.white);
+        messageText.setForeground(Color.red);
         messageText.setEditable(false); //display text only? or buttons here instead?
         messageText.setLineWrap(true);
         messageText.setWrapStyleWord(true);
@@ -435,6 +436,14 @@ public class Gooey extends CountdownTimer {
         createBackground(7, "images/rooms/westRoom.png");
         createArrowButton(7, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go west hall");
         bgPanel[7].add(bgLabel[7]);
+
+        //Scene 8 (Die)
+        createBackground(8, "images/rooms/badfinish.png");
+        bgPanel[8].add(bgLabel[8]);
+
+        //Scene 9 (Win)
+        createBackground(9, "images/rooms/goodfinish.png");
+        bgPanel[9].add(bgLabel[9]);
     }
 
 }

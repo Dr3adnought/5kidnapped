@@ -1,5 +1,6 @@
 package com.sprints.gui.util;
 
+import com.sprints.TextFileReader;
 import com.sprints.TextParser;
 import com.sprints.Player;
 import com.sprints.gui.EyesOpen;
@@ -88,6 +89,16 @@ public class ActionHandler implements ActionListener {
             case "look It" : gc.gooey.messageText.setText("It (book): The story follows the experiences of seven children as they are terrorized by an evil entity that exploits the fears of its victims to disguise itself while hunting its prey."); break;
             case "get It" : gc.gooey.messageText.setText("You took Stephen King's 'It'.");
                 gc.gooey.inventoryText.setText(Player.getInstance().getCurrentInventory().toString());
+                    if(Player.getInstance().getCurrentInventory().contains("it")) {
+                        gc.gooey.messageText.setText("You pull the book from the shelf and hear the faint sound of gears rotating. The shelf slides left, revealing a door. You step through and awake once more...It was all a terrible dream.");
+                        CountdownTimer.timer.stop();
+                        try {
+                            TextFileReader.getInstance().txtFileReader("/escaped.txt");
+                            SceneChanger.switchScene(bgPanel[9]);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
             // TODO : CheckWin() from Game Class
             break;
             case "look Reprieve" : gc.gooey.messageText.setText("Reprieve (book): Seems to be a novel about otherness, loneliness, racism, and identity wrapped in a gory tale about a full-contact escape room attraction."); break;
@@ -140,6 +151,8 @@ public class ActionHandler implements ActionListener {
             case "go east room" : gc.sChanger.switchScene(bgPanel[5]); Player.getInstance().setCurrentRoom("east rooom"); break;
             case "go west hall" : gc.sChanger.switchScene(bgPanel[6]); Player.getInstance().setCurrentRoom("west hall"); break;
             case "go west room" : gc.sChanger.switchScene(bgPanel[7]); Player.getInstance().setCurrentRoom("west room"); break;
+            case "badfinish" : gc.sChanger.switchScene(bgPanel[8]); Player.getInstance().setCurrentRoom("badfinish"); break;
+
 
         }
     }
