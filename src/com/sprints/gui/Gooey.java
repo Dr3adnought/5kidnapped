@@ -377,10 +377,10 @@ public class Gooey extends CountdownTimer {
         createArrowButton(2, 325, 325, 50, 50, "images/arrows/arrow_down.png", "go basement");
         createArrowButton(2, 700, 140, 50, 50, "images/arrows/arrow_right.png", "go east hall");
         createArrowButton(2, 0, 140, 50, 50, "images/arrows/arrow_left.png", "go west hall");
-        createObject(2,85,47,198,165,"images/objects/streamers1.png","Look","","look streamers","");
-        createObject(2,80,265,50,50,"images/objects/candleholders.png","Look","","look candle holders","");
-        createObject(2,390,265,317,105,"images/objects/bones.png","Look","","look corpse","");
-        createObject(2,360,110,50,65,"images/objects/portrait.png","Look","","look portrait","");
+        createObject(2,85,47,198,165,"images/objects/streamers1.png","Look","Get","look streamers","get streamers");
+        createObject(2,80,265,50,50,"images/objects/candleholders.png","Look","Get","look candle holders","get candle holders");
+        createObject(2,390,265,317,105,"images/objects/bones.png","Look","Get","look corpse","get corpse");
+        createObject(2,360,110,50,65,"images/objects/portrait.png","Look","Get","look portrait","get portrait");
         createObject(2, 275, 230, 50, 50, "images/objects/clue.png", "Look", "Get", "look clue1", "get clue1");
         bgPanel[2].add(bgLabel[2]);
 
